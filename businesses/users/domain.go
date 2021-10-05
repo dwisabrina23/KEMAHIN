@@ -12,7 +12,7 @@ type Domain struct {
 	Prodi     string    `json:"prodi"`
 	Phone     string    `json:"phone"`
 	Email     string    `json:"email"`
-	RoleID    int       `json:"role_id"`
+	RoleID    uint      `json:"role_id"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }

@@ -5,10 +5,11 @@ import (
 	"kemahin/controllers/users"
 
 	"errors"
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
 	controller "kemahin/controllers"
 	"net/http"
+
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 type ControllerList struct {
@@ -17,12 +18,12 @@ type ControllerList struct {
 }
 
 func (cl *ControllerList) RouteRegister(e *echo.Echo) {
-	middlewareApp.Log(e)
-	e.Pre(middleware.RemoveTrailingSlash())
+	// middlewareApp.Loge)
+	// e.Pre(middleware.RemoveTrailingSlash))
 	users := e.Group("user")
 	users.POST("/login", cl.UserController.Login)
 	users.POST("/register", cl.UserController.Register)
-	users.GET("", cl.UserController.GetByID)
+	users.GET("/:id", cl.UserController.GetByID)
 }
 
 func RoleValidation(role string, userController users.UserController) echo.MiddlewareFunc {

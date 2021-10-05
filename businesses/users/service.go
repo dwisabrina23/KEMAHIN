@@ -35,10 +35,6 @@ func (su *serviceUsers) Register(data *Domain) (Domain, error) {
 	}
 
 	data.Pasword = encrypt.HashAndSalt([]byte(data.Pasword))
-	if err != nil {
-		return Domain{}, businesses.ErrInternalServer
-	}
-
 	result, err := su.repository.Register(data)
 	if err != nil {
 		return Domain{}, err
