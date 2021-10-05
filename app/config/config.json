@@ -1,0 +1,20 @@
+{
+    "debug": true,
+    "server": {
+      "address": ":8080"
+    },
+    "context":{
+      "timeout":2
+    },
+    "database": {
+        "host": "localhost",
+        "port": "3306",
+        "user": "dwisabrina",
+        "pass": "kaolala2309",
+        "name": "kemahin"
+    },
+    "jwt" : {
+      "secret" : "Rahasia678!@#$%",
+      "expired" : 1
+    }
+  }
