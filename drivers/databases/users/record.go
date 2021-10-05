@@ -13,7 +13,7 @@ type Users struct {
 	Prodi     string
 	Phone     string
 	Email     string
-	RoleID    int
+	RoleID    uint
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
@@ -42,6 +42,7 @@ func fromDomain(userDomain users.Domain) *Users {
 		Prodi:     userDomain.Prodi,
 		Phone:     userDomain.Phone,
 		Email:     userDomain.Email,
+		RoleID:    userDomain.RoleID,
 		CreatedAt: userDomain.CreatedAt,
 		UpdatedAt: userDomain.UpdatedAt,
 	}
