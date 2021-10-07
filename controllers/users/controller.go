@@ -4,6 +4,7 @@ import (
 	"kemahin/businesses/users"
 	controller "kemahin/controllers"
 	"kemahin/controllers/users/request"
+	"kemahin/controllers/users/response"
 	"net/http"
 	"strconv"
 
@@ -75,4 +76,18 @@ func (ctrl *UserController) GetByID(c echo.Context) error {
 		return controller.NewErrorResponse(c, http.StatusInternalServerError, err)
 	}
 	return controller.NewSuccessResponse(c, user)
+}
+
+func (ctrl *UserController) Update(c echo.Context) error {
+	req := request.Users{}
+	if err := c.Bind(&req); err != nil {
+		return controller.NewErrorResponse(c, http.StatusBadRequest, err)
+	}
+
+	id, err := strconv.Atoi(c.QueryParam("id"))
+	resp, err := ctrl.userServices.Update(id, req.ToDomain())
+	if err != nil {
+		return controller.NewErrorResponse(c, http.StatusInternalServerError, err)
+	}
+	return controller.NewSuccessResponse(c, response.FromDomain(*resp))
 }
