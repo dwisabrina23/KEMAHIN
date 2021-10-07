@@ -11,6 +11,10 @@ import (
 	_eventController "kemahin/controllers/events"
 	_eventRepo "kemahin/drivers/databases/events"
 
+	_orgService "kemahin/businesses/organizers"
+	_orgController "kemahin/controllers/organizer"
+	_orgRepo "kemahin/drivers/databases/organizers"
+
 	"github.com/labstack/echo/v4"
 	"github.com/spf13/viper"
 	"gorm.io/gorm"
@@ -38,6 +42,7 @@ func dbMigrate(db *gorm.DB) {
 	db.AutoMigrate(
 		&_userRepo.Users{},
 		&_eventRepo.Events{},
+		&_orgRepo.Organizer{},
 	)
 }
 
@@ -68,10 +73,15 @@ func main() {
 	eventService := _eventService.NewService(eventRepo)
 	eventCtrl := _eventController.NewEventController(eventService)
 
+	orgRepo := _driverFactory.NewOrgRepository(db)
+	orgService := _orgService.NewService(orgRepo, &configJWT)
+	orgCtrl := _orgController.NewOrgController(orgService)
+
 	routesInit := _routes.ControllerList{
-		JWTMiddleware:   configJWT.Init(),
-		UserController:  *userCtrl,
-		EventController: *eventCtrl,
+		JWTMiddleware:       configJWT.Init(),
+		UserController:      *userCtrl,
+		EventController:     *eventCtrl,
+		OrganizerController: *orgCtrl,
 	}
 	routesInit.RouteRegister(e)
 
