@@ -32,23 +32,23 @@ func (ctrl *EventController) Register(c echo.Context) error {
 	if err != nil {
 		return controller.NewErrorResponse(c, http.StatusInternalServerError, err)
 	}
-	return controller.NewSuccessResponse(c, data)
+	return controller.NewSuccessResponse(c, response.FromDomain(data))
 }
 
 func (ctrl *EventController) Update(c echo.Context) error {
-	// id, _ := strconv.Atoi(c.QueryParam("id"))
+	id, _ := strconv.Atoi(c.QueryParam("id"))
 	req := request.Events{}
 	if err := c.Bind(&req); err != nil {
 		return controller.NewErrorResponse(c, http.StatusBadRequest, err)
 	}
 
 	domainReq := req.ToDomain()
-	resp, err := ctrl.eventService.Update(domainReq)
+	domainReq.Id = uint(id)
+	resp, err := ctrl.eventService.Update(id, domainReq)
 	if err != nil {
 		return controller.NewErrorResponse(c, http.StatusInternalServerError, err)
 	}
-
-	return controller.NewSuccessResponse(c, resp)
+	return controller.NewSuccessResponse(c, response.FromDomain(resp))
 }
 
 func (ctrl *EventController) Delete(c echo.Context) error {
@@ -77,7 +77,7 @@ func (ctrl *EventController) GetByJudul(c echo.Context) error {
 		return controller.NewErrorResponse(c, http.StatusInternalServerError, err)
 	}
 
-	return controller.NewSuccessResponse(c, event)
+	return controller.NewSuccessResponse(c, response.FromDomain(event))
 }
 
 func (ctrl *EventController) UpcomingEvent(c echo.Context) error {

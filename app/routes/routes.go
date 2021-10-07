@@ -2,6 +2,7 @@ package routes
 
 import (
 	middlewareApp "kemahin/app/middlewares"
+	"kemahin/controllers/events"
 	"kemahin/controllers/users"
 
 	"errors"
@@ -13,17 +14,27 @@ import (
 )
 
 type ControllerList struct {
-	JWTMiddleware  middleware.JWTConfig
-	UserController users.UserController
+	JWTMiddleware   middleware.JWTConfig
+	UserController  users.UserController
+	EventController events.EventController
 }
 
 func (cl *ControllerList) RouteRegister(e *echo.Echo) {
-	// middlewareApp.Loge)
+	// middlewareApp.Log(e)
 	// e.Pre(middleware.RemoveTrailingSlash))
 	users := e.Group("user")
 	users.POST("/login", cl.UserController.Login)
 	users.POST("/register", cl.UserController.Register)
 	users.GET("/:id", cl.UserController.GetByID)
+	users.PUT("/update/:id", cl.UserController.Update, middleware.JWTWithConfig(cl.JWTMiddleware))
+
+	events := e.Group("events")
+	events.POST("/register", cl.EventController.Register)
+	events.PUT("/:id", cl.EventController.Update)
+	events.DELETE(":/id", cl.EventController.Delete)
+	events.GET("/:id", cl.EventController.GetByID)
+	events.GET("/:judul", cl.EventController.GetByJudul)
+	events.GET("/upcoming", cl.EventController.UpcomingEvent)
 }
 
 func RoleValidation(role string, userController users.UserController) echo.MiddlewareFunc {

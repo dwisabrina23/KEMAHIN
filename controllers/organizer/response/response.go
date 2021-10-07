@@ -1,33 +1,27 @@
 package response
 
 import (
-	"kemahin/businesses/users"
+	"kemahin/businesses/organizers"
 	"time"
 )
 
-type Users struct {
+type Organizer struct {
 	Id        int       `json:"id"`
-	NIM       string    `json: "nim"`
+	Username  string    `json: "username"`
 	Pasword   string    `json: "password"`
 	Name      string    `json: "name"`
-	Prodi     string    `json: "prodi"`
 	Phone     string    `json: "Phone"`
-	Email     string    `json: "email"`
-	RoleID    uint      `json:"role_id"`
 	CreatedAt time.Time `json: "created_at"`
 	UpdatedAt time.Time `json: "updated_at"`
 }
 
-func FromDomain(domain users.Domain) Users {
-	return Users{
+func FromDomain(domain organizers.Domain) Organizer {
+	return Organizer{
 		Id:        domain.Id,
-		NIM:       domain.NIM,
+		Username:  domain.Username,
 		Pasword:   domain.Pasword,
 		Name:      domain.Name,
-		Prodi:     domain.Prodi,
 		Phone:     domain.Phone,
-		Email:     domain.Email,
-		RoleID:    domain.RoleID,
 		CreatedAt: domain.CreatedAt,
 		UpdatedAt: domain.UpdatedAt,
 	}

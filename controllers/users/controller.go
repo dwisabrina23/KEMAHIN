@@ -1,6 +1,7 @@
 package users
 
 import (
+	"kemahin/app/middlewares"
 	"kemahin/businesses/users"
 	controller "kemahin/controllers"
 	"kemahin/controllers/users/request"
@@ -31,7 +32,7 @@ func (ctrl *UserController) Register(c echo.Context) error {
 		return controller.NewErrorResponse(c, http.StatusInternalServerError, err)
 	}
 
-	return controller.NewSuccessResponse(c, data)
+	return controller.NewSuccessResponse(c, response.FromDomain(data))
 }
 
 func (ctrl *UserController) GetUserRole(id int) string {
@@ -84,10 +85,10 @@ func (ctrl *UserController) Update(c echo.Context) error {
 		return controller.NewErrorResponse(c, http.StatusBadRequest, err)
 	}
 
-	id, err := strconv.Atoi(c.QueryParam("id"))
+	id, _ := strconv.Atoi(middlewares.GetUser(c).Id)
 	resp, err := ctrl.userServices.Update(id, req.ToDomain())
 	if err != nil {
 		return controller.NewErrorResponse(c, http.StatusInternalServerError, err)
 	}
-	return controller.NewSuccessResponse(c, response.FromDomain(*resp))
+	return controller.NewSuccessResponse(c, resp)
 }

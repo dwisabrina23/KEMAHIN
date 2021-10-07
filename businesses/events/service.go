@@ -36,14 +36,14 @@ func (se *serviceEvents) Register(data *Domain) (Domain, error) {
 	return dataEvent, nil
 }
 
-func (se *serviceEvents) Update(data *Domain) (Domain, error) {
+func (se *serviceEvents) Update(id int, data *Domain) (Domain, error) {
 	existedUser, err := se.repository.GetByID(int(data.Id))
 	if err != nil {
 		return Domain{}, err
 	}
 	data.Id = existedUser.Id
 
-	dataEventUpdated, err := se.repository.Update(data)
+	dataEventUpdated, err := se.repository.Update(id, data)
 	if err != nil {
 		return Domain{}, err
 	}

@@ -27,14 +27,21 @@ func (mysqlRepo *mysqlEventsRepository) Register(data *events.Domain) (events.Do
 	return recEvent.ToDomain(), nil
 }
 
-func (mysqlRepo *mysqlEventsRepository) Update(data *events.Domain) (events.Domain, error) {
-	event := FromDomain(*data)
-	err := mysqlRepo.Conn.First(&event, data.Id).Updates(*event).Error
+func (mysqlRepo *mysqlEventsRepository) Update(id int, data *events.Domain) (events.Domain, error) {
+	recEvent := FromDomain(*data)
+
+	result := mysqlRepo.Conn.Save(&recEvent)
+	if result.Error != nil {
+		return events.Domain{}, result.Error
+	}
+
+	//update tabel join (event org)
+	err := mysqlRepo.Conn.Preload("Organizer").First(&recEvent, recEvent.Id).Error
 	if err != nil {
 		return events.Domain{}, err
 	}
 
-	return event.ToDomain(), nil
+	return recEvent.ToDomain(), nil
 }
 
 func (mysqlRepo *mysqlEventsRepository) Delete(id int) (string, error) {

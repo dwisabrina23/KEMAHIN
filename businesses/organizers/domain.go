@@ -14,12 +14,12 @@ type Domain struct {
 
 type Service interface {
 	Login(nim string, password string) (string, error)
+	Register(data *Domain) (Domain, error)
 	GetByID(id int) (Domain, error)
-	Update(id int, orgData *Domain) (Domain, error)
 }
 
 type Repository interface {
 	GetByID(id int) (Domain, error)
-	Update(id int, orgData *Domain) (Domain, error)
-	GetByName(name string) (Domain, error)
+	Register(data *Domain) (Domain, error)
+	GetByUsername(name string) (Domain, error)
 }

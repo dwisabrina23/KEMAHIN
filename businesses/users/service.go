@@ -23,7 +23,7 @@ func NewService(repoUSer Repsitory, jtwauth *middleware.ConfigJWT) Service {
 
 func (su *serviceUsers) Register(data *Domain) (Domain, error) {
 
-	existedUser, err := su.repository.GetByID(data.Id)
+	existedUser, err := su.repository.GetByNIM(data.NIM)
 	if err != nil {
 		if !strings.Contains(err.Error(), "not found") {
 			return Domain{}, err
