@@ -3,7 +3,7 @@ package events
 import "time"
 
 type Domain struct {
-	Id               uint
+	Id               int
 	Judul            string
 	Poster           string
 	Desc             string

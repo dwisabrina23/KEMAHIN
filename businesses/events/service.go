@@ -17,6 +17,7 @@ func NewService(repoEvents Repository) Service {
 }
 
 func (se *serviceEvents) Register(data *Domain) (Domain, error) {
+
 	existedEvent, err := se.repository.GetByID(int(data.Id))
 	if err != nil {
 		if !strings.Contains(err.Error(), "not found") {

@@ -43,7 +43,7 @@ func (ctrl *EventController) Update(c echo.Context) error {
 	}
 
 	domainReq := req.ToDomain()
-	domainReq.Id = uint(id)
+	domainReq.Id = id
 	resp, err := ctrl.eventService.Update(id, domainReq)
 	if err != nil {
 		return controller.NewErrorResponse(c, http.StatusInternalServerError, err)
