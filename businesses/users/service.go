@@ -59,14 +59,14 @@ func (su *serviceUsers) Login(nim string, password string) (string, error) {
 	return token, nil
 }
 
-func (su *serviceUsers) Update(data *Domain) (*Domain, error) {
+func (su *serviceUsers) Update(id int, data *Domain) (*Domain, error) {
 	existedUser, err := su.repository.GetByID(data.Id)
 	if err != nil {
 		return &Domain{}, err
 	}
 	data.Id = existedUser.Id
 
-	res, err := su.repository.Update(data)
+	res, err := su.repository.Update(id, data)
 	if err != nil {
 		return &Domain{}, err
 	}
