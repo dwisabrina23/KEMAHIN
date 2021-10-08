@@ -30,8 +30,11 @@ func (mysqlRepo *mySqlTicketRepository) Create(ticketData *tickets.Domain) (tick
 func (mysqlRepo *mySqlTicketRepository) GetByUserId(idUser int) ([]tickets.Domain, error) {
 	rec := []Tickets{}
 	err := mysqlRepo.Conn.Joins("Events").Joins("Orders").Find(&rec, "user_id", idUser).Error
+	if err != nil{
+		return []tickets.Domain{}, err
+	}
 	if len(rec) == 0 {
-		err = errors.New("Order data not found")
+		err = errors.New("order data not found")
 		return []tickets.Domain{}, err
 	}
 

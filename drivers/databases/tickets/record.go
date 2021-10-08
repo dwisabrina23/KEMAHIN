@@ -11,7 +11,7 @@ import (
 
 type Tickets struct {
 	gorm.Model
-	Id      int           `json:"id" gorm:primaryKey`
+	Id      int           `json:"id"`
 	Code    string        `json:"code"`
 	EventID int           `json:"event_id"`
 	Event   events.Events `gorm:"foreignKey:EventID;references:ID"`
