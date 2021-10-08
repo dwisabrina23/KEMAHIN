@@ -15,11 +15,11 @@ type Payment struct {
 type Orders struct {
 	Id        int           `json:"id" gorm:primaryKey`
 	UserID    int           `json:"user_id"`
-	User      users.Users   `gorm:"constraint:OnUpdate:NO ACTION,OnDelete:CASCADE;"`
+	User      users.Users   `gorm:"foreignKey:UserID;references:ID"`
 	EventID   int           `json:"event_id"`
-	Event     events.Events `gorm:"constraint:OnUpdate:CASCADE,OnDelete:NO ACTION;"`
+	Event     events.Events `gorm:"foreignKey:EventID;references:ID"`
 	PaymentID int           `json:"payment_id"`
-	Payment   Payment       `gorm:"constraint:OnUpdate:NO ACTION,OnDelete:NO ACTION;"`
+	Payment   Payment       `gorm:"foreignKey:PaymentID;references:ID"`
 	Price     int           `json:"price"`
 	Status    int           `json:"status" gorm:"default:0"`
 	Qty       int           `json:"qty"`

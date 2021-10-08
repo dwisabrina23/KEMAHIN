@@ -10,21 +10,21 @@ import (
 
 type Events struct {
 	gorm.Model
-	Id               int                  `json: "id"`
-	Judul            string               `json: "judul"`
-	Prefix           string               `json:"prefix"`
-	Poster           string               `json: "poster"`
-	Desc             string               `json: "desc"`
-	StartDate        time.Time            `json: "start_date"`
-	EndDate          time.Time            `json: "end_date"`
-	BatasPendaftaran time.Time            `json: "batas_pendaftaran"`
-	Place            string               `json: "place"`
-	Quota            int                  `json: "quota"`
-	Status           int                  `json: "status"`
-	Price            int                  `json: "price"`
-	CP               string               `json: "cp"`
-	IDOrganizer      int                  `json: "id_org"`
-	Organizer        organizers.Organizer `gorm:"constraint:OnUpdate:CASCADE"`
+	Id               int                   `json: "id"`
+	Judul            string                `json: "judul"`
+	Prefix           string                `json:"prefix"`
+	Poster           string                `json: "poster"`
+	Desc             string                `json: "desc"`
+	StartDate        time.Time             `json: "start_date"`
+	EndDate          time.Time             `json: "end_date"`
+	BatasPendaftaran time.Time             `json: "batas_pendaftaran"`
+	Place            string                `json: "place"`
+	Quota            int                   `json: "quota"`
+	Status           int                   `json: "status"`
+	Price            int                   `json: "price"`
+	CP               string                `json: "cp"`
+	IDOrganizer      int                   `json: "id_org"`
+	Organizer        organizers.Organizers `gorm:"foreignKey:IDOrganizer;references:ID"`
 }
 
 func (rec *Events) ToDomain() events.Domain {

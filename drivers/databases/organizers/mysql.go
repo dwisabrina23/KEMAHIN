@@ -17,7 +17,7 @@ func NewMySqlRepository(conn *gorm.DB) organizers.Repository {
 }
 
 func (sqlRepo *MySqlOrganizerRepository) GetByID(id int) (organizers.Domain, error) {
-	rec := Organizer{}
+	rec := Organizers{}
 	err := sqlRepo.Conn.Where("id = ?", id).First(&rec).Error
 	if err != nil {
 		return organizers.Domain{}, err
@@ -26,7 +26,7 @@ func (sqlRepo *MySqlOrganizerRepository) GetByID(id int) (organizers.Domain, err
 }
 
 func (sqlRepo *MySqlOrganizerRepository) GetByUsername(username string) (organizers.Domain, error) {
-	rec := Organizer{}
+	rec := Organizers{}
 	err := sqlRepo.Conn.Where("username = ?", username).First(&rec).Error
 	if err != nil {
 		return organizers.Domain{}, err

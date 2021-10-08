@@ -5,7 +5,7 @@ import (
 	"kemahin/businesses/organizers"
 )
 
-type Organizer struct {
+type Organizers struct {
 	gorm.Model
 	Username string `json:"username"`
 	Pasword  string `json:"password"`
@@ -13,7 +13,7 @@ type Organizer struct {
 	Phone    string `json:"phone"`
 }
 
-func (rec *Organizer) ToDomain() organizers.Domain {
+func (rec *Organizers) ToDomain() organizers.Domain {
 	return organizers.Domain{
 		Id:        int(rec.ID),
 		Username:  rec.Username,
@@ -25,8 +25,8 @@ func (rec *Organizer) ToDomain() organizers.Domain {
 	}
 }
 
-func fromDomain(domain organizers.Domain) *Organizer {
-	return &Organizer{
+func fromDomain(domain organizers.Domain) *Organizers {
+	return &Organizers{
 		Model: gorm.Model{
 			ID:        uint(domain.Id),
 			CreatedAt: domain.CreatedAt,

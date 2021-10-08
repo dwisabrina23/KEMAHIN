@@ -13,12 +13,12 @@ type Tickets struct {
 	gorm.Model
 	Id      int           `json:"id" gorm:primaryKey`
 	Code    string        `json:"code"`
-	EventID int           `json:"id_event"`
-	Event   events.Events `gorm:"constraint:OnUpdate:CASCADE,OnDelete:NO ACTION;"`
-	UserID  int           `json:"id_user"`
-	User    users.Users   `gorm:"constraint:OnUpdate:NO ACTION,OnDelete:CASCADE;"`
-	OrderID int           `json:"id_order"`
-	Order   orders.Orders `gorm:"constraint:OnUpdate:NO ACTION,OnDelete:CASCADE;"`
+	EventID int           `json:"event_id"`
+	Event   events.Events `gorm:"foreignKey:EventID;references:ID"`
+	UserID  int           `json:"user_id"`
+	User    users.Users   `gorm:"foreignKey:UserID;references:ID"`
+	OrderID int           `json:"order_id"`
+	Order   orders.Orders `gorm:"foreignKey:OrderID;references:ID"`
 }
 
 func (rec *Tickets) ToDomain() tickets.Domain {

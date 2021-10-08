@@ -36,7 +36,7 @@ func (mysqlRepo *mysqlEventsRepository) Update(id int, data *events.Domain) (eve
 	}
 
 	//update tabel join (event org)
-	err := mysqlRepo.Conn.Preload("Organizer").First(&recEvent, recEvent.Id).Error
+	err := mysqlRepo.Conn.Preload("Organizers").First(&recEvent, recEvent.Id).Error
 	if err != nil {
 		return events.Domain{}, err
 	}
