@@ -49,11 +49,11 @@ func (cl *ControllerList) RouteRegister(e *echo.Echo) {
 	orders := e.Group("orders")
 	orders.POST("/create", cl.OrdersController.Create)
 	orders.GET("/:id", cl.UserController.GetByID)
-	orders.PUT("/validate:id", cl.OrdersController.ValidateOrder)
+	orders.PUT("/validate/:id", cl.OrdersController.ValidateOrder)
 
 	tickets := e.Group("tickets")
 	tickets.POST("/create", cl.TicketController.Create)
-	tickets.GET("/:id_user", cl.TicketController.GetByUserId)
+	tickets.GET("/:user_id", cl.TicketController.GetByUserId)
 
 	sends := e.Group("sends")
 	sends.POST("/:id", cl.TicketController.GetByUserId)

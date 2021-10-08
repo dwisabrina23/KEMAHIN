@@ -23,7 +23,7 @@ func NewOrgController(service organizers.Service) *OrgController {
 }
 
 func (ctrl *OrgController) Register(c echo.Context) error {
-	req := request.Organizer{}
+	req := request.Organizers{}
 	if err := c.Bind(&req); err != nil {
 		return controller.NewErrorResponse(c, http.StatusBadRequest, err)
 	}

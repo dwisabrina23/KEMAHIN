@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-type Organizer struct {
+type Organizers struct {
 	Id        int       `json:"id"`
 	Username  string    `json: "username"`
 	Pasword   string    `json: "password"`
@@ -15,8 +15,8 @@ type Organizer struct {
 	UpdatedAt time.Time `json: "updated_at"`
 }
 
-func FromDomain(domain organizers.Domain) Organizer {
-	return Organizer{
+func FromDomain(domain organizers.Domain) Organizers {
+	return Organizers{
 		Id:        domain.Id,
 		Username:  domain.Username,
 		Pasword:   domain.Pasword,

@@ -50,7 +50,7 @@ func dbMigrate(db *gorm.DB) {
 	db.AutoMigrate(
 		&_userRepo.Users{},
 		&_eventRepo.Events{},
-		&_orgRepo.Organizer{},
+		&_orgRepo.Organizers{},
 		&_eventRepo.Events{},
 		&_orderRepo.Orders{},
 		&_ticketRepo.Tickets{},

@@ -3,9 +3,9 @@ package request
 import "kemahin/businesses/tickets"
 
 type Tickets struct {
-	EventID int `json:"id_event"`
-	UserID  int `json:"id_user"`
-	OrderID int `json:"id_order"`
+	EventID int `json:"event_id"`
+	UserID  int `json:"user_id"`
+	OrderID int `json:"order_id"`
 }
 
 func (req *Tickets) ToDomain() *tickets.Domain {

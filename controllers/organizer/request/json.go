@@ -2,7 +2,7 @@ package request
 
 import "kemahin/businesses/organizers"
 
-type Organizer struct {
+type Organizers struct {
 	Id       int    `json: "id"`
 	Username string `json: "username"`
 	Password string `json: "password"`
@@ -15,7 +15,7 @@ type OrgLogin struct {
 	Password string `json: "password"`
 }
 
-func (req *Organizer) ToDomain() *organizers.Domain {
+func (req *Organizers) ToDomain() *organizers.Domain {
 	return &organizers.Domain{
 		Id:       req.Id,
 		Username: req.Username,

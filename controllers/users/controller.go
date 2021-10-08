@@ -80,12 +80,13 @@ func (ctrl *UserController) GetByID(c echo.Context) error {
 }
 
 func (ctrl *UserController) Update(c echo.Context) error {
+	id, _ := strconv.Atoi(middlewares.GetUser(c).Id)
+
 	req := request.Users{}
 	if err := c.Bind(&req); err != nil {
 		return controller.NewErrorResponse(c, http.StatusBadRequest, err)
 	}
 
-	id, _ := strconv.Atoi(middlewares.GetUser(c).Id)
 	resp, err := ctrl.userServices.Update(id, req.ToDomain())
 	if err != nil {
 		return controller.NewErrorResponse(c, http.StatusInternalServerError, err)
