@@ -19,7 +19,6 @@ type UserLogin struct {
 }
 
 type UsersUpdate struct {
-	Id       string `json: "id"`
 	Password string `json: "password"`
 	Name     string `json: "name"`
 	Prodi    string `json: "prodi"`

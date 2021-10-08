@@ -6,7 +6,7 @@ import (
 )
 
 type Users struct {
-	ID        int       `json:"id"`
+	Id        int       `json:"id"`
 	NIM       string    `json: "nim"`
 	Pasword   string    `json: "password"`
 	Name      string    `json: "name"`
@@ -20,7 +20,7 @@ type Users struct {
 
 func FromDomain(domain users.Domain) Users {
 	return Users{
-		ID:        domain.Id,
+		Id:        domain.Id,
 		NIM:       domain.NIM,
 		Pasword:   domain.Pasword,
 		Name:      domain.Name,

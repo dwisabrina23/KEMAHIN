@@ -25,9 +25,9 @@ func (ur *MySqlUsersRepository) Register(userData *users.Domain) (users.Domain, 
 	return user.toDomain(), nil
 }
 
-func (ur *MySqlUsersRepository) Update(data *users.Domain) (users.Domain, error) {
+func (ur *MySqlUsersRepository) Update(id int, data *users.Domain) (users.Domain, error) {
 	user := fromDomain(*data)
-	err := ur.Conn.First(&user, data.Id).Updates(*user).Error
+	err := ur.Conn.First(&user, "id = ?", id).Updates(user).Error
 	if err != nil {
 		return users.Domain{}, err
 	}

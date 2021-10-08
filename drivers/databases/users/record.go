@@ -3,24 +3,27 @@ package users
 import (
 	"kemahin/businesses/users"
 	"time"
+
+	"gorm.io/gorm"
 )
 
 type Users struct {
-	ID        int
-	NIM       string
-	Pasword   string
-	Name      string
-	Prodi     string
-	Phone     string
-	Email     string
-	RoleID    uint
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	gorm.Model
+	Id        int       `json:"id"`
+	NIM       string    `json:"nim" gorm:"unique"`
+	Pasword   string    `json:"password"`
+	Name      string    `json:"name"`
+	Prodi     string    `json:"prodi"`
+	Phone     string    `json:"phone"`
+	Email     string    `json:"email"`
+	RoleID    uint      `json:"role_id"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 func (rec *Users) toDomain() users.Domain {
 	return users.Domain{
-		Id:        rec.ID,
+		Id:        rec.Id,
 		NIM:       rec.NIM,
 		Pasword:   rec.Pasword,
 		Name:      rec.Name,
@@ -33,17 +36,19 @@ func (rec *Users) toDomain() users.Domain {
 	}
 }
 
-func fromDomain(userDomain users.Domain) *Users {
+func fromDomain(domain users.Domain) *Users {
 	return &Users{
-		ID:        userDomain.Id,
-		NIM:       userDomain.NIM,
-		Pasword:   userDomain.Pasword,
-		Name:      userDomain.Name,
-		Prodi:     userDomain.Prodi,
-		Phone:     userDomain.Phone,
-		Email:     userDomain.Email,
-		RoleID:    userDomain.RoleID,
-		CreatedAt: userDomain.CreatedAt,
-		UpdatedAt: userDomain.UpdatedAt,
+		Model: gorm.Model{
+			ID:        uint(domain.Id),
+			CreatedAt: domain.CreatedAt,
+			UpdatedAt: domain.UpdatedAt,
+		},
+		NIM:     domain.NIM,
+		Pasword: domain.Pasword,
+		Name:    domain.Name,
+		Prodi:   domain.Prodi,
+		Phone:   domain.Phone,
+		Email:   domain.Email,
+		RoleID:  domain.RoleID,
 	}
 }

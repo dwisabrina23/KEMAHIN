@@ -1,31 +1,37 @@
 package orders
 
 import (
-	"context"
+	"kemahin/businesses/events"
 	"time"
 )
 
 type Domain struct {
-	Id         int
-	IdPayment  int
-	TotalPrice int
-	Status     int
-	IdBuktiTF  int
-	CreatedAt  time.Time
-	UpdatedAt  time.Time
+	Id          int
+	UserID      int
+	UserNIM     string
+	EventID     int
+	EventName   string
+	PaymentID   int
+	PaymentName string
+	Price       int
+	Status      int
+	Qty         int
+	CreatedAt   time.Time
+	UpdatedAt   time.Time
+	// IdBuktiTF  int
+
 }
 
 type Service interface {
-	GetByID(c context.Context, id int) (Domain, error)
-	Store(c context.Context, data *Domain) error
-	Update(c context.Context, data *Domain) (Domain, error)
-	DeleteById(c context.Context, id int) error
-	ValidateBuktiTF(c context.Context, idTF int) error
+	Create(idUser int, orderData *Domain) (Domain, error)
+	GetByUserID(idUSer int) ([]Domain, error)
+	ValidateOrder(idOrder int) (Domain, error)
 }
 
 type Repository interface {
-	Store(c context.Context, data *Domain) error
-	Update(c context.Context, data *Domain) (Domain, error)
-	DeleteById(c context.Context, id int) error
-	ValidateBuktiTF(c context.Context, idTF int) error
+	Create(orderData *Domain, eventData *events.Domain) (Domain, error)
+	GetByUserID(idUSer int) ([]Domain, error)
+	ValidateOrder(idOrder int) (Domain, error)
+	GetPaymentByID(idPay int) (string, error)
+	GetByOrderId(id int) (Domain, error)
 }

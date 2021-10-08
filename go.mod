@@ -5,6 +5,7 @@ go 1.17
 require (
 	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/labstack/echo/v4 v4.6.1
+	github.com/sendgrid/sendgrid-go v3.10.1+incompatible
 	github.com/spf13/viper v1.9.0
 	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5
 	gorm.io/driver/mysql v1.1.2
@@ -23,6 +24,7 @@ require (
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/mitchellh/mapstructure v1.4.2 // indirect
 	github.com/pelletier/go-toml v1.9.4 // indirect
+	github.com/sendgrid/rest v2.6.5+incompatible // indirect
 	github.com/spf13/afero v1.6.0 // indirect
 	github.com/spf13/cast v1.4.1 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
