@@ -6,7 +6,7 @@ import (
 )
 
 type Orders struct {
-	Id          int       `gorm:primaryKey`
+	Id          int       `json:"id"`
 	UserID      int       `json:"user_id"`
 	UserNIM     string    `json:"user_nim"`
 	EventID     int       `json:"event_id"`

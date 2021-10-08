@@ -12,17 +12,17 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type UserController struct {
+type OrgController struct {
 	orgServices organizers.Service
 }
 
-func NewUserController(service organizers.Service) *UserController {
-	return &UserController{
+func NewOrgController(service organizers.Service) *OrgController {
+	return &OrgController{
 		orgServices: service,
 	}
 }
 
-func (ctrl *UserController) Register(c echo.Context) error {
+func (ctrl *OrgController) Register(c echo.Context) error {
 	req := request.Organizer{}
 	if err := c.Bind(&req); err != nil {
 		return controller.NewErrorResponse(c, http.StatusBadRequest, err)
@@ -35,7 +35,7 @@ func (ctrl *UserController) Register(c echo.Context) error {
 	return controller.NewSuccessResponse(c, response.FromDomain(data))
 }
 
-func (ctrl *UserController) Login(c echo.Context) error {
+func (ctrl *OrgController) Login(c echo.Context) error {
 	req := request.OrgLogin{}
 	if err := c.Bind(&req); err != nil {
 		return controller.NewErrorResponse(c, http.StatusBadRequest, err)
@@ -53,7 +53,7 @@ func (ctrl *UserController) Login(c echo.Context) error {
 	return controller.NewSuccessResponse(c, res)
 }
 
-func (ctrl *UserController) GetByID(c echo.Context) error {
+func (ctrl *OrgController) GetByID(c echo.Context) error {
 	id, _ := strconv.Atoi(c.QueryParam("id"))
 	user, err := ctrl.orgServices.GetByID(id)
 	if err != nil {

@@ -57,3 +57,12 @@ func (mysqlRepo *mySqlOrdersRepository) GetPaymentByID(idPay int) (string, error
 	}
 	return paymentRec.Name, nil
 }
+
+func (mysqlRepo *mySqlOrdersRepository) GetByOrderId(id int) (orders.Domain, error) {
+	rec := Orders{}
+	err := mysqlRepo.Conn.Where("id = ?", id).First(&rec).Error
+	if err != nil {
+		return orders.Domain{}, err
+	}
+	return rec.ToDomain(), nil
+}

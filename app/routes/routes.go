@@ -3,7 +3,9 @@ package routes
 import (
 	middlewareApp "kemahin/app/middlewares"
 	"kemahin/controllers/events"
+	"kemahin/controllers/orders"
 	"kemahin/controllers/organizer"
+	"kemahin/controllers/tickets"
 	"kemahin/controllers/users"
 
 	"errors"
@@ -19,11 +21,13 @@ type ControllerList struct {
 	UserController      users.UserController
 	EventController     events.EventController
 	OrganizerController organizers.OrgController
+	OrdersController    orders.OrderController
+	TicketController    tickets.TicketController
 }
 
 func (cl *ControllerList) RouteRegister(e *echo.Echo) {
-	// middlewareApp.Log(e)
-	// e.Pre(middleware.RemoveTrailingSlash))
+	middlewareApp.Log(e)
+	e.Pre(middleware.RemoveTrailingSlash())
 	users := e.Group("user")
 	users.POST("/login", cl.UserController.Login)
 	users.POST("/register", cl.UserController.Register)
@@ -42,6 +46,17 @@ func (cl *ControllerList) RouteRegister(e *echo.Echo) {
 	org.POST("/register", cl.OrganizerController.Register)
 	org.POST("/login", cl.OrganizerController.Login)
 
+	orders := e.Group("orders")
+	orders.POST("/create", cl.OrdersController.Create)
+	orders.GET("/:id", cl.UserController.GetByID)
+	orders.PUT("/validate:id", cl.OrdersController.ValidateOrder)
+
+	tickets := e.Group("tickets")
+	tickets.POST("/create", cl.TicketController.Create)
+	tickets.GET("/:id_user", cl.TicketController.GetByUserId)
+
+	sends := e.Group("sends")
+	sends.POST("/:id", cl.TicketController.GetByUserId)
 }
 
 func RoleValidation(role string, userController users.UserController) echo.MiddlewareFunc {

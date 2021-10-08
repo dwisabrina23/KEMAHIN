@@ -14,6 +14,12 @@ import (
 
 	orderDomain "kemahin/businesses/orders"
 	orderDB "kemahin/drivers/databases/orders"
+
+	ticketDomain "kemahin/businesses/tickets"
+	ticketDB "kemahin/drivers/databases/tickets"
+
+	sendDomain "kemahin/businesses/sendgrids"
+	sendDB "kemahin/drivers/thirdparties/sendgrid"
 )
 
 func NewUserRepository(conn *gorm.DB) userDomain.Repsitory {
@@ -30,4 +36,12 @@ func NewOrgRepository(conn *gorm.DB) orgDomain.Repository {
 
 func NewOrderRepository(conn *gorm.DB) orderDomain.Repository {
 	return orderDB.NewMySQLRepository(conn)
+}
+
+func NewTicketRepository(conn *gorm.DB) ticketDomain.Repsitory {
+	return ticketDB.NewMySQLRepository(conn)
+}
+
+func NewSendRepository(conn *gorm.DB) sendDomain.Repository {
+	return sendDB.NewSendAPI()
 }

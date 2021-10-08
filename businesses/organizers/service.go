@@ -12,6 +12,13 @@ type serviceOrganizer struct {
 	jwtAuth    *middleware.ConfigJWT
 }
 
+func NewService(repoOrg Repository, jtwauth *middleware.ConfigJWT) Service {
+	return &serviceOrganizer{
+		repository: repoOrg,
+		jwtAuth:    jtwauth,
+	}
+}
+
 func (serv *serviceOrganizer) Register(data *Domain) (Domain, error) {
 
 	existedUser, err := serv.repository.GetByUsername(data.Username)

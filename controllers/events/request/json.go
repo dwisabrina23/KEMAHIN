@@ -6,7 +6,7 @@ import (
 )
 
 type Events struct {
-	Id               uint      `json: "id"`
+	Id               int       `json: "id"`
 	Judul            string    `json: "judul"`
 	Poster           string    `json: "poster"`
 	Desc             string    `json: "desc"`

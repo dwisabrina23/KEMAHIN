@@ -15,6 +15,14 @@ import (
 	_orgController "kemahin/controllers/organizer"
 	_orgRepo "kemahin/drivers/databases/organizers"
 
+	_orderService "kemahin/businesses/orders"
+	_oderController "kemahin/controllers/orders"
+	_orderRepo "kemahin/drivers/databases/orders"
+
+	_ticketService "kemahin/businesses/tickets"
+	_ticketController "kemahin/controllers/tickets"
+	_ticketRepo "kemahin/drivers/databases/tickets"
+
 	"github.com/labstack/echo/v4"
 	"github.com/spf13/viper"
 	"gorm.io/gorm"
@@ -43,7 +51,12 @@ func dbMigrate(db *gorm.DB) {
 		&_userRepo.Users{},
 		&_eventRepo.Events{},
 		&_orgRepo.Organizer{},
+		&_eventRepo.Events{},
+		&_orderRepo.Orders{},
+		&_ticketRepo.Tickets{},
 	)
+	payments := []_orderRepo.Payment{{Id: 1, Name: "Cash"}, {Id: 3, Name: "Link Aja"}, {Id: 2, Name: "QRIS"}}
+	db.Create(&payments)
 }
 
 func main() {
@@ -77,11 +90,21 @@ func main() {
 	orgService := _orgService.NewService(orgRepo, &configJWT)
 	orgCtrl := _orgController.NewOrgController(orgService)
 
+	orderRepo := _driverFactory.NewOrderRepository(db)
+	orderService := _orderService.NewOrderService(orderRepo, eventRepo, userRepo)
+	orderCtrl := _oderController.NewOrderController(orderService)
+
+	ticketRepo := _driverFactory.NewTicketRepository(db)
+	ticketService := _ticketService.NewTicketService(ticketRepo, userRepo, eventRepo)
+	ticketCtrl := _ticketController.NewTicketController(ticketService)
+
 	routesInit := _routes.ControllerList{
 		JWTMiddleware:       configJWT.Init(),
 		UserController:      *userCtrl,
 		EventController:     *eventCtrl,
 		OrganizerController: *orgCtrl,
+		OrdersController:    *orderCtrl,
+		TicketController:    *ticketCtrl,
 	}
 	routesInit.RouteRegister(e)
 

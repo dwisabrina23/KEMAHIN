@@ -13,7 +13,7 @@ type Payment struct {
 	Name string
 }
 type Orders struct {
-	Id        int           `gorm:primaryKey`
+	Id        int           `json:"id" gorm:primaryKey`
 	UserID    int           `json:"user_id"`
 	User      users.Users   `gorm:"constraint:OnUpdate:NO ACTION,OnDelete:CASCADE;"`
 	EventID   int           `json:"event_id"`

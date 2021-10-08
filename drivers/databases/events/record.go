@@ -12,6 +12,7 @@ type Events struct {
 	gorm.Model
 	Id               int                  `json: "id"`
 	Judul            string               `json: "judul"`
+	Prefix           string               `json:"prefix"`
 	Poster           string               `json: "poster"`
 	Desc             string               `json: "desc"`
 	StartDate        time.Time            `json: "start_date"`
@@ -30,6 +31,7 @@ func (rec *Events) ToDomain() events.Domain {
 	return events.Domain{
 		Id:               rec.Id,
 		Judul:            rec.Judul,
+		Prefix:           rec.Prefix,
 		Poster:           rec.Poster,
 		Desc:             rec.Desc,
 		StartDate:        rec.StartDate,
@@ -64,6 +66,7 @@ func FromDomain(domain events.Domain) *Events {
 		},
 		Id:               domain.Id,
 		Judul:            domain.Judul,
+		Prefix:           domain.Prefix,
 		Poster:           domain.Poster,
 		Desc:             domain.Desc,
 		StartDate:        domain.StartDate,

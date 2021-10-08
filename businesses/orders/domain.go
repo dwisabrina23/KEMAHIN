@@ -33,4 +33,5 @@ type Repository interface {
 	GetByUserID(idUSer int) ([]Domain, error)
 	ValidateOrder(idOrder int) (Domain, error)
 	GetPaymentByID(idPay int) (string, error)
+	GetByOrderId(id int) (Domain, error)
 }

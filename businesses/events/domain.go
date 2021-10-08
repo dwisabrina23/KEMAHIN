@@ -5,6 +5,7 @@ import "time"
 type Domain struct {
 	Id               int
 	Judul            string
+	Prefix           string
 	Poster           string
 	Desc             string
 	StartDate        time.Time
