@@ -66,6 +66,7 @@ func (su *serviceUsers) Update(data Domain) (Domain, error) {
 		return Domain{}, err
 	}
 	data.UpdatedAt = time.Now()
+	data.Pasword = encrypt.HashAndSalt([]byte(data.Pasword))
 
 	res, err := su.repository.Update(data)
 	if err != nil {
