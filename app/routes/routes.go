@@ -33,6 +33,8 @@ func (cl *ControllerList) RouteRegister(e *echo.Echo) {
 	users.POST("/register", cl.UserController.Register)
 	users.GET("/:id", cl.UserController.GetByID)
 	users.PUT("/update/:id", cl.UserController.Update, middleware.JWTWithConfig(cl.JWTMiddleware))
+	users.PUT("/updates", cl.UserController.Update, middleware.JWTWithConfig(cl.JWTMiddleware))
+	users.PUT("/update", cl.UserController.Update)
 
 	events := e.Group("events")
 	events.POST("/register", cl.EventController.Register)

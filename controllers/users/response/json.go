@@ -11,9 +11,9 @@ type Users struct {
 	Pasword   string    `json: "password"`
 	Name      string    `json: "name"`
 	Prodi     string    `json: "prodi"`
-	Phone     string    `json: "Phone"`
+	Phone     string    `json: "phone"`
 	Email     string    `json: "email"`
-	RoleID    uint      `json:"role_id"`
+	RoleID    int       `json:"role_id"`
 	CreatedAt time.Time `json: "created_at"`
 	UpdatedAt time.Time `json: "updated_at"`
 }

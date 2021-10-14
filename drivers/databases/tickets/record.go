@@ -46,9 +46,7 @@ func FromDomain(domain tickets.Domain) *Tickets {
 		},
 		UserID: domain.UserID,
 		User: users.Users{
-			Model: gorm.Model{
-				ID: uint(domain.UserID),
-			},
+			Id: domain.UserID,
 			Email: domain.UserEmail,
 		},
 		OrderID: domain.OrderID,

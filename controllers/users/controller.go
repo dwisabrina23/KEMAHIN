@@ -1,7 +1,7 @@
 package users
 
 import (
-	"kemahin/app/middlewares"
+	// "kemahin/app/middlewares"
 	"kemahin/businesses/users"
 	controller "kemahin/controllers"
 	"kemahin/controllers/users/request"
@@ -80,16 +80,17 @@ func (ctrl *UserController) GetByID(c echo.Context) error {
 }
 
 func (ctrl *UserController) Update(c echo.Context) error {
-	id, _ := strconv.Atoi(middlewares.GetUser(c).Id)
+	// id, _ := strconv.Atoi(middlewares.GetUser(c).Id)
 
-	req := request.Users{}
+	req := request.UserUpdate{}
 	if err := c.Bind(&req); err != nil {
 		return controller.NewErrorResponse(c, http.StatusBadRequest, err)
 	}
 
-	resp, err := ctrl.userServices.Update(id, req.ToDomain())
+	_, err := ctrl.userServices.Update(req.ToDomain())
 	if err != nil {
 		return controller.NewErrorResponse(c, http.StatusInternalServerError, err)
 	}
-	return controller.NewSuccessResponse(c, resp)
+
+	return controller.UpdateSuccesResponse(c, "Success to update user data")
 }
