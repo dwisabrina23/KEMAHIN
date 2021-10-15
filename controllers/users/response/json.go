@@ -13,7 +13,7 @@ type Users struct {
 	Prodi     string    `json: "prodi"`
 	Phone     string    `json: "phone"`
 	Email     string    `json: "email"`
-	RoleID    int       `json:"role_id"`
+	Role      int       `json: "role"`
 	CreatedAt time.Time `json: "created_at"`
 	UpdatedAt time.Time `json: "updated_at"`
 }
@@ -27,7 +27,7 @@ func FromDomain(domain users.Domain) Users {
 		Prodi:     domain.Prodi,
 		Phone:     domain.Phone,
 		Email:     domain.Email,
-		RoleID:    domain.RoleID,
+		Role:      domain.Role,
 		CreatedAt: domain.CreatedAt,
 		UpdatedAt: domain.UpdatedAt,
 	}
