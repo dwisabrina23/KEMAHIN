@@ -12,7 +12,7 @@ type Domain struct {
 	Prodi     string
 	Phone     string
 	Email     string
-	RoleID    int
+	Role      int
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }

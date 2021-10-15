@@ -35,23 +35,6 @@ func (ctrl *UserController) Register(c echo.Context) error {
 	return controller.NewSuccessResponse(c, response.FromDomain(data))
 }
 
-func (ctrl *UserController) GetUserRole(id int) string {
-	role := ""
-	user, err := ctrl.userServices.GetByID(id)
-	if err == nil {
-		if user.RoleID == 1 {
-			role = "mhs"
-		}
-		if user.RoleID == 2 {
-			role = "admin"
-		}
-		if user.RoleID == 3 {
-			role = "organizer"
-		}
-	}
-	return role
-}
-
 func (ctrl *UserController) Login(c echo.Context) error {
 	req := request.UserLogin{}
 	if err := c.Bind(&req); err != nil {
@@ -93,4 +76,21 @@ func (ctrl *UserController) Update(c echo.Context) error {
 	}
 
 	return controller.UpdateSuccesResponse(c, "Success to update user data")
+}
+
+func (ctrl *UserController) GetUserRole(id int) string {
+	role := ""
+	user, err := ctrl.userServices.GetByID(id)
+	if err == nil {
+		if user.Role == 1 {
+			role = "user"
+		}
+		if user.Role == 2 {
+			role = "admin"
+		}
+		if user.Role == 3 {
+			role = "organizer"
+		}
+	}
+	return role
 }
