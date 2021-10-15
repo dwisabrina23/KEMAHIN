@@ -21,8 +21,10 @@ func NewMySQLRepository(conn *gorm.DB) events.Repository {
 
 func (mysqlRepo *mysqlEventsRepository) Register(data *events.Domain) (events.Domain, error) {
 	recEvent := FromDomain(*data)
-	if err := mysqlRepo.Conn.Create(&recEvent).Error; err != nil {
-		return events.Domain{}, err
+	// result := mysqlRepo.Conn.Preload("Organizers").Create(&recEvent)
+	result := mysqlRepo.Conn.Create(&recEvent)
+	if result.Error != nil {
+		return events.Domain{}, result.Error
 	}
 	return recEvent.ToDomain(), nil
 }

@@ -1,6 +1,8 @@
 package events
 
-import "time"
+import (
+	"time"
+)
 
 type Domain struct {
 	Id               int
@@ -16,8 +18,7 @@ type Domain struct {
 	Status           int
 	Price            int
 	CP               string
-	IDOrganizer      int
-	OrganizerName    string
+	Organizer        int
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
 }

@@ -1,37 +1,51 @@
 package events
 
 import (
+	"fmt"
 	"kemahin/businesses"
-	"strings"
+	"kemahin/businesses/organizers"
 	"time"
 )
 
 type serviceEvents struct {
 	repository Repository
+	repoOrg    organizers.Repository
 }
 
-func NewService(repoEvents Repository) Service {
+func NewService(repo Repository, repoOrg organizers.Repository) Service {
 	return &serviceEvents{
-		repository: repoEvents,
+		repository: repo,
+		repoOrg:    repoOrg,
 	}
 }
 
 func (se *serviceEvents) Register(data *Domain) (Domain, error) {
+	if data.Organizer == 0 {
+		return Domain{}, businesses.ErrFillData
+	}
 
-	existedEvent, err := se.repository.GetByID(int(data.Id))
+	// existedEvent, err := se.repository.GetByID(int(data.Id))
+	// if err != nil {
+	// 	if !strings.Contains(err.Error(), "not found") {
+	// 		return Domain{}, err
+	// 	}
+	// }
+
+	// if existedEvent != (Domain{}) {
+	// 	return Domain{}, businesses.ErrDuplicateData
+	// }
+	//check organizer
+	orgData, err := se.repoOrg.GetByID(data.Organizer)
+	fmt.Println(orgData)
 	if err != nil {
-		if !strings.Contains(err.Error(), "not found") {
-			return Domain{}, err
-		}
+		return Domain{}, businesses.ErrInvalidOrgID
 	}
-
-	if existedEvent != (Domain{}) {
-		return Domain{}, businesses.ErrDuplicateData
-	}
-
+	data.Organizer = orgData.Id
+	fmt.Println(data.Organizer)
+	// data.StartDate, _ = time.Parse("2006-01-02", data.StartDate.String())
 	dataEvent, err := se.repository.Register(data)
 	if err != nil {
-		return Domain{}, businesses.ErrInternalServer
+		return Domain{}, err
 	}
 
 	return dataEvent, nil

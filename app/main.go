@@ -49,7 +49,6 @@ func init() {
 func dbMigrate(db *gorm.DB) {
 	db.AutoMigrate(
 		&_userRepo.Users{},
-		&_eventRepo.Events{},
 		&_orgRepo.Organizers{},
 		&_eventRepo.Events{},
 		&_orderRepo.Orders{},
@@ -82,13 +81,13 @@ func main() {
 	userService := _userService.NewService(userRepo, &configJWT)
 	userCtrl := _userController.NewUserController(userService)
 
-	eventRepo := _driverFactory.NewEventRepository(db)
-	eventService := _eventService.NewService(eventRepo)
-	eventCtrl := _eventController.NewEventController(eventService)
-
 	orgRepo := _driverFactory.NewOrgRepository(db)
 	orgService := _orgService.NewService(orgRepo, &configJWT)
 	orgCtrl := _orgController.NewOrgController(orgService)
+
+	eventRepo := _driverFactory.NewEventRepository(db)
+	eventService := _eventService.NewService(eventRepo, orgRepo)
+	eventCtrl := _eventController.NewEventController(eventService)
 
 	orderRepo := _driverFactory.NewOrderRepository(db)
 	orderService := _orderService.NewOrderService(orderRepo, eventRepo, userRepo)
@@ -101,8 +100,8 @@ func main() {
 	routesInit := _routes.ControllerList{
 		JWTMiddleware:       configJWT.Init(),
 		UserController:      *userCtrl,
-		EventController:     *eventCtrl,
 		OrganizerController: *orgCtrl,
+		EventController:     *eventCtrl,
 		OrdersController:    *orderCtrl,
 		TicketController:    *ticketCtrl,
 	}
