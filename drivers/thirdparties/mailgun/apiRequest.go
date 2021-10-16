@@ -9,8 +9,8 @@ import (
 	"github.com/mailgun/mailgun-go/v4"
 )
 
-var yourDomain string = "sandbox707dabe9e9bd429a8c7066f997b2b7a0.mailgun.org"
-var privateAPIKey string = "2b33642558ee30e3fdf34f9aa66422d1-2ac825a1-9ee2e972"
+var yourDomain string = "domain"
+var privateAPIKey string = "api-key"
 
 type MailgunAPI struct {
 }
