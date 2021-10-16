@@ -39,14 +39,12 @@ func FromDomain(domain tickets.Domain) *Tickets {
 		Code:    domain.Code,
 		EventID: domain.EventID,
 		Event: events.Events{
-			Model: gorm.Model{
-				ID: uint(domain.EventID),
-			},
+			Id:     domain.EventID,
 			Prefix: domain.Prefix,
 		},
 		UserID: domain.UserID,
 		User: users.Users{
-			Id: domain.UserID,
+			Id:    domain.UserID,
 			Email: domain.UserEmail,
 		},
 		OrderID: domain.OrderID,

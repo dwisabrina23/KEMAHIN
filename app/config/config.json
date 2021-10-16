@@ -11,7 +11,7 @@
         "port": "3306",
         "user": "dwisabrina",
         "pass": "kaolala2309",
-        "name": "db_kemahin"
+        "name": "training"
     },
     "jwt" : {
       "secret" : "Rahasia678!@#$%",

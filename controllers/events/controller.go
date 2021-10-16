@@ -69,7 +69,7 @@ func (ctrl *EventController) GetByID(c echo.Context) error {
 		return controller.NewErrorResponse(c, http.StatusInternalServerError, err)
 	}
 
-	return controller.NewSuccessResponse(c, event)
+	return controller.NewSuccessResponse(c, response.FromDomainDetail(event))
 }
 
 func (ctrl *EventController) GetByJudul(c echo.Context) error {
@@ -78,8 +78,12 @@ func (ctrl *EventController) GetByJudul(c echo.Context) error {
 	if err != nil {
 		return controller.NewErrorResponse(c, http.StatusInternalServerError, err)
 	}
+	respController := []response.Events{}
+	for _, value := range event {
+		respController = append(respController, response.FromDomain(value))
+	}
 
-	return controller.NewSuccessResponse(c, response.FromDomain(event))
+	return controller.NewSuccessResponse(c, respController)
 }
 
 func (ctrl *EventController) UpcomingEvent(c echo.Context) error {

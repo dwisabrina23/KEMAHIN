@@ -6,7 +6,7 @@ import (
 )
 
 type Events struct {
-	// Id               int       `json: "id"`
+	Id               int       `json: "id"`
 	Judul            string `json: "judul"`
 	Prefix           string `json:"prefix"`
 	Poster           string `json: "poster"`
@@ -27,6 +27,7 @@ func (rec *Events) ToDomain() *events.Domain {
 	endDate, _ := time.Parse("2006-01-02 15:04", rec.EndDate)
 	batasDate, _ := time.Parse("2006-01-02 15:04", rec.BatasPendaftaran)
 	return &events.Domain{
+		Id: rec.Id,
 		Judul:            rec.Judul,
 		Prefix:           rec.Prefix,
 		Poster:           rec.Poster,

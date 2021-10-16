@@ -17,6 +17,7 @@ type Domain struct {
 type Service interface {
 	Create(idOrder int, ticketData *Domain) (Domain, error)
 	GetByUserId(idUser int) ([]Domain, error)
+	// SendTicket(ticketData Domain) error
 }
 
 type Repsitory interface {

@@ -5,7 +5,7 @@ import (
 	"kemahin/drivers/databases/events"
 	"kemahin/drivers/databases/users"
 
-	"gorm.io/gorm"
+	// "gorm.io/gorm"
 )
 
 type Payment struct {
@@ -15,11 +15,11 @@ type Payment struct {
 type Orders struct {
 	Id        int           `json:"id" gorm:primaryKey`
 	UserID    int           `json:"user_id"`
-	User      users.Users   `gorm:"foreignKey:UserID;references:ID"`
+	User      users.Users   `gorm:"foreignKey:UserID"`
 	EventID   int           `json:"event_id"`
-	Event     events.Events `gorm:"foreignKey:EventID;references:ID"`
+	Event     events.Events `gorm:"foreignKey:EventID"`
 	PaymentID int           `json:"payment_id"`
-	Payment   Payment       `gorm:"foreignKey:PaymentID;references:ID"`
+	Payment   Payment       `gorm:"foreignKey:PaymentID"`
 	Price     int           `json:"price"`
 	Status    int           `json:"status" gorm:"default:0"`
 	Qty       int           `json:"qty"`
@@ -54,9 +54,6 @@ func FromDomain(domain orders.Domain) *Orders {
 		UserID:  domain.UserID,
 		EventID: domain.EventID,
 		Event: events.Events{
-			Model: gorm.Model{
-				ID: uint(domain.EventID),
-			},
 			Judul: domain.EventName,
 		},
 		Payment: Payment{domain.PaymentID, domain.PaymentName},

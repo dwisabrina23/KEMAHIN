@@ -43,7 +43,7 @@ func (serv *ServiceOrder) Create(idUser int, orderData *Domain) (Domain, error) 
 	orderData.EventID = eventData.Id
 	orderData.EventName = eventData.Judul
 
-	res, err := serv.orderRepository.Create(orderData, &eventData)
+	res, err := serv.orderRepository.Create(orderData, eventData)
 	if err != nil {
 		return Domain{}, businesses.ErrInternalServer
 	}

@@ -21,6 +21,8 @@ type Events struct {
 	Price            int       `json: "price"`
 	CP               string    `json: "cp"`
 	Organizer        int       `json: "organizer"`
+	CreatedAt        time.Time `json: "created_at"`
+	UpdatedAt        time.Time `json: "updated_at"`
 }
 
 func FromDomain(domain events.Domain) Events {
@@ -39,5 +41,28 @@ func FromDomain(domain events.Domain) Events {
 		Price:            domain.Price,
 		CP:               domain.CP,
 		Organizer:        domain.Organizer,
+		CreatedAt:        domain.CreatedAt,
+		UpdatedAt:        domain.UpdatedAt,
+	}
+}
+
+func FromDomainDetail(domain *events.Domain) *Events {
+	return &Events{
+		Id:               domain.Id,
+		Judul:            domain.Judul,
+		Prefix:           domain.Prefix,
+		Poster:           domain.Poster,
+		Desc:             domain.Desc,
+		StartDate:        domain.StartDate,
+		EndDate:          domain.EndDate,
+		BatasPendaftaran: domain.BatasPendaftaran,
+		Place:            domain.Place,
+		Quota:            domain.Quota,
+		Status:           domain.Status,
+		Price:            domain.Price,
+		CP:               domain.CP,
+		Organizer:        domain.Organizer,
+		CreatedAt:        domain.CreatedAt,
+		UpdatedAt:        domain.UpdatedAt,
 	}
 }

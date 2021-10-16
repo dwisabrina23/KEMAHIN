@@ -12,7 +12,8 @@ var (
 	ErrOutOfStock              = errors.New("ticket out of stock")
 	ErrInvalidPaymentMeth      = errors.New("invalid payment method")
 	ErrOrderNotFound           = errors.New("order not found")
-	ErrInvalidOrderID = errors.New("invalid order id")
-	ErrInvalidTicketID = errors.New("invalid order id")
-
+	ErrInvalidOrderID          = errors.New("invalid order id")
+	ErrInvalidOrgID            = errors.New("invalid organizer id")
+	ErrInvalidTicketID         = errors.New("invalid order id")
+	ErrFillData                = errors.New("please fill in the required data")
 )

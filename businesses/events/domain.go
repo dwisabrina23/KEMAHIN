@@ -27,8 +27,8 @@ type Service interface {
 	Register(data *Domain) (Domain, error)
 	Update(id int, data *Domain) (Domain, error)
 	Delete(id int) (string, error)
-	GetByID(id int) (Domain, error)
-	GetByJudul(judul string) (Domain, error)
+	GetByID(id int) (*Domain, error)
+	GetByJudul(judul string) ([]Domain, error)
 	UpcomingEvent(date time.Time) ([]Domain, error)
 }
 
@@ -36,7 +36,7 @@ type Repository interface {
 	Register(data *Domain) (Domain, error)
 	Update(id int, data *Domain) (Domain, error)
 	Delete(id int) (string, error)
-	GetByID(id int) (Domain, error)
+	GetByID(id int) (*Domain, error)
 	UpcomingEvent(date time.Time) ([]Domain, error)
-	GetByJudul(judul string) (Domain, error)
+	GetByJudul(judul string) ([]Domain, error)
 }

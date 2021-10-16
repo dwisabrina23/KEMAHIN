@@ -39,6 +39,7 @@ func (serv *serviceOrganizer) Register(data *Domain) (Domain, error) {
 	}
 	return result, nil
 }
+
 func (serv *serviceOrganizer) Login(username string, password string) (string, error) {
 	if strings.TrimSpace(username) == "" && strings.TrimSpace(password) == "" {
 		return "", businesses.ErrUsernamePasswordInvalid

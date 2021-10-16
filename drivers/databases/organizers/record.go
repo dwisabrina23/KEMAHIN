@@ -1,21 +1,24 @@
 package organizers
 
 import (
-	"gorm.io/gorm"
 	"kemahin/businesses/organizers"
+	"time"
+	// "gorm.io/gorm"
 )
 
 type Organizers struct {
-	gorm.Model
-	Username string `json:"username"`
-	Pasword  string `json:"password"`
-	Name     string `json:"name"`
-	Phone    string `json:"phone"`
+	Id        int       `json:"id" gorm:"primaryKey"`
+	Username  string    `json:"username"`
+	Pasword   string    `json:"password"`
+	Name      string    `json:"name"`
+	Phone     string    `json:"phone"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 func (rec *Organizers) ToDomain() organizers.Domain {
 	return organizers.Domain{
-		Id:        int(rec.ID),
+		Id:        rec.Id,
 		Username:  rec.Username,
 		Pasword:   rec.Pasword,
 		Name:      rec.Name,
@@ -27,14 +30,12 @@ func (rec *Organizers) ToDomain() organizers.Domain {
 
 func fromDomain(domain organizers.Domain) *Organizers {
 	return &Organizers{
-		Model: gorm.Model{
-			ID:        uint(domain.Id),
-			CreatedAt: domain.CreatedAt,
-			UpdatedAt: domain.UpdatedAt,
-		},
-		Username: domain.Username,
-		Pasword:  domain.Pasword,
-		Name:     domain.Name,
-		Phone:    domain.Phone,
+		Id:        domain.Id,
+		Username:  domain.Username,
+		Pasword:   domain.Pasword,
+		Name:      domain.Name,
+		Phone:     domain.Phone,
+		CreatedAt: domain.CreatedAt,
+		UpdatedAt: domain.UpdatedAt,
 	}
 }

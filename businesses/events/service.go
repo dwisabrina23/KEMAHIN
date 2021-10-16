@@ -74,10 +74,10 @@ func (se *serviceEvents) Delete(id int) (string, error) {
 	return res, nil
 }
 
-func (se *serviceEvents) GetByID(id int) (Domain, error) {
+func (se *serviceEvents) GetByID(id int) (*Domain, error) {
 	resp, err := se.repository.GetByID(id)
 	if err != nil {
-		return Domain{}, err
+		return &Domain{}, err
 	}
 	return resp, nil
 }
@@ -90,10 +90,10 @@ func (se *serviceEvents) UpcomingEvent(date time.Time) ([]Domain, error) {
 	return res, nil
 }
 
-func (se *serviceEvents) GetByJudul(judul string) (Domain, error) {
+func (se *serviceEvents) GetByJudul(judul string) ([]Domain, error) {
 	res, err := se.repository.GetByJudul(judul)
 	if err != nil {
-		return Domain{}, err
+		return []Domain{}, err
 	}
 	return res, nil
 }
