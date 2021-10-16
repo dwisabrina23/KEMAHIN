@@ -10,7 +10,7 @@ type Users struct {
 	Prodi    string `json: "prodi"`
 	Phone    string `json: "phone"`
 	Email    string `json: "email"`
-	RoleID   uint   `json: "role_id"`
+	Role     int    `json: "role"`
 }
 
 type UserLogin struct {
@@ -18,10 +18,9 @@ type UserLogin struct {
 	Password string `json: "password"`
 }
 
-type UsersUpdate struct {
+type UserUpdate struct {
+	Id       int    `json:"id"`
 	Password string `json: "password"`
-	Name     string `json: "name"`
-	Prodi    string `json: "prodi"`
 	Phone    string `json: "phone"`
 	Email    string `json: "email"`
 }
@@ -35,6 +34,15 @@ func (req *Users) ToDomain() *users.Domain {
 		Prodi:   req.Prodi,
 		Phone:   req.Phone,
 		Email:   req.Email,
-		RoleID:  req.RoleID,
+		Role:    req.Role,
+	}
+}
+
+func (req *UserUpdate) ToDomain() users.Domain {
+	return users.Domain{
+		Id:      req.Id,
+		Pasword: req.Password,
+		Phone:   req.Phone,
+		Email:   req.Email,
 	}
 }

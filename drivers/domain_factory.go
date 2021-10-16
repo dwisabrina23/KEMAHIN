@@ -26,12 +26,12 @@ func NewUserRepository(conn *gorm.DB) userDomain.Repsitory {
 	return userDB.NewMySqlRepository(conn)
 }
 
-func NewEventRepository(conn *gorm.DB) eventDomain.Repository {
-	return eventDB.NewMySQLRepository(conn)
-}
-
 func NewOrgRepository(conn *gorm.DB) orgDomain.Repository {
 	return orgDB.NewMySqlRepository(conn)
+}
+
+func NewEventRepository(conn *gorm.DB) eventDomain.Repository {
+	return eventDB.NewMySQLRepository(conn)
 }
 
 func NewOrderRepository(conn *gorm.DB) orderDomain.Repository {

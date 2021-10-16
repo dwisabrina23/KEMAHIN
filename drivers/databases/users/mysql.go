@@ -25,11 +25,11 @@ func (ur *MySqlUsersRepository) Register(userData *users.Domain) (users.Domain, 
 	return user.toDomain(), nil
 }
 
-func (ur *MySqlUsersRepository) Update(id int, data *users.Domain) (users.Domain, error) {
-	user := fromDomain(*data)
-	err := ur.Conn.First(&user, "id = ?", id).Updates(user).Error
-	if err != nil {
-		return users.Domain{}, err
+func (ur *MySqlUsersRepository) Update(data users.Domain) (users.Domain, error) {
+	user := fromDomain(data)
+	result := ur.Conn.Where("id = ?", user.Id).Updates(&Users{Pasword: user.Pasword, Phone: user.Phone, Email: user.Email})
+	if result.Error != nil {
+		return users.Domain{}, result.Error
 	}
 
 	return user.toDomain(), nil

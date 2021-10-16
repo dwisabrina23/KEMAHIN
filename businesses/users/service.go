@@ -5,6 +5,7 @@ import (
 	"kemahin/businesses"
 	"kemahin/helpers/encrypt"
 	"strings"
+	"time"
 	// _cacheDomain "kemahin/businesses/cache"
 	// "time"
 )
@@ -59,19 +60,20 @@ func (su *serviceUsers) Login(nim string, password string) (string, error) {
 	return token, nil
 }
 
-func (su *serviceUsers) Update(id int, data *Domain) (*Domain, error) {
-	existedUser, err := su.repository.GetByID(data.Id)
+func (su *serviceUsers) Update(data Domain) (Domain, error) {
+	_, err := su.repository.GetByID(data.Id)
 	if err != nil {
-		return &Domain{}, err
+		return Domain{}, err
 	}
-	data.Id = existedUser.Id
+	data.UpdatedAt = time.Now()
+	data.Pasword = encrypt.HashAndSalt([]byte(data.Pasword))
 
-	res, err := su.repository.Update(id, data)
+	res, err := su.repository.Update(data)
 	if err != nil {
-		return &Domain{}, err
+		return Domain{}, err
 	}
 
-	return &res, nil
+	return res, nil
 }
 
 func (su *serviceUsers) GetByID(id int) (Domain, error) {

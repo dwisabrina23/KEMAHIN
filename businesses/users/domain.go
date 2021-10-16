@@ -12,7 +12,7 @@ type Domain struct {
 	Prodi     string
 	Phone     string
 	Email     string
-	RoleID    uint
+	Role      int
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
@@ -20,13 +20,13 @@ type Domain struct {
 type Service interface {
 	Register(data *Domain) (Domain, error)
 	Login(nim string, password string) (string, error)
-	Update(id int, data *Domain) (*Domain, error)
+	Update(Data Domain) (Domain, error)
 	GetByID(id int) (Domain, error)
 }
 
 type Repsitory interface {
 	GetByNIM(nim string) (Domain, error)
 	Register(data *Domain) (Domain, error)
-	Update(id int, data *Domain) (Domain, error)
+	Update(Data Domain) (Domain, error)
 	GetByID(id int) (Domain, error)
 }
