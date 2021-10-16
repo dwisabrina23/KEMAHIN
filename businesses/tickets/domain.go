@@ -20,7 +20,7 @@ type Service interface {
 	// SendTicket(ticketData Domain) error
 }
 
-type Repsitory interface {
+type Repository interface {
 	Create(ticketData *Domain) (Domain, error)
 	GetByUserId(idUser int) ([]Domain, error)
 	GetByID(id int) (Domain, error)

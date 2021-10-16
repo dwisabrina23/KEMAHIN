@@ -11,7 +11,7 @@ type mySqlTicketRepository struct {
 	Conn *gorm.DB
 }
 
-func NewMySQLRepository(conn *gorm.DB) tickets.Repsitory {
+func NewMySQLRepository(conn *gorm.DB) tickets.Repository {
 	return &mySqlTicketRepository{
 		Conn: conn,
 	}
@@ -30,7 +30,7 @@ func (mysqlRepo *mySqlTicketRepository) Create(ticketData *tickets.Domain) (tick
 func (mysqlRepo *mySqlTicketRepository) GetByUserId(idUser int) ([]tickets.Domain, error) {
 	rec := []Tickets{}
 	err := mysqlRepo.Conn.Joins("Events").Joins("Orders").Find(&rec, "user_id", idUser).Error
-	if err != nil{
+	if err != nil {
 		return []tickets.Domain{}, err
 	}
 	if len(rec) == 0 {

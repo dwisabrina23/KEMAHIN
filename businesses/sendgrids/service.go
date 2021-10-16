@@ -7,10 +7,10 @@ import (
 
 type SendService struct {
 	sendRepository   Repository
-	ticketRepository tickets.Repsitory
+	ticketRepository tickets.Repository
 }
 
-func NewSendService(ticketRepo tickets.Repsitory, sendRepo Repository) Service {
+func NewSendService(ticketRepo tickets.Repository, sendRepo Repository) Service {
 	return &SendService{
 		sendRepository:   sendRepo,
 		ticketRepository: ticketRepo,
