@@ -6,6 +6,11 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+type Helper interface {
+	HashAndSalt(pwd []byte) string
+	ValidateHash(secret, hash string) bool
+}
+
 func HashAndSalt(pwd []byte) string {
 	hash, err := bcrypt.GenerateFromPassword(pwd, bcrypt.MinCost)
 	if err != nil {
