@@ -13,3 +13,4 @@
 *.env
 # Dependency directories (remove the comment below to include it)
 ./app/config/config.json
+
