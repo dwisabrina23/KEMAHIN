@@ -24,7 +24,7 @@ type Service interface {
 	GetByID(id int) (Domain, error)
 }
 
-type Repsitory interface {
+type Repository interface {
 	GetByNIM(nim string) (Domain, error)
 	Register(data *Domain) (Domain, error)
 	Update(Data Domain) (Domain, error)

@@ -11,11 +11,11 @@ import (
 )
 
 type serviceUsers struct {
-	repository Repsitory
+	repository Repository
 	jwtAuth    *middleware.ConfigJWT
 }
 
-func NewService(repoUSer Repsitory, jtwauth *middleware.ConfigJWT) Service {
+func NewService(repoUSer Repository, jtwauth *middleware.ConfigJWT) Service {
 	return &serviceUsers{
 		repository: repoUSer,
 		jwtAuth:    jtwauth,

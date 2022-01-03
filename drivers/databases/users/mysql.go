@@ -10,7 +10,7 @@ type MySqlUsersRepository struct {
 	Conn *gorm.DB
 }
 
-func NewMySqlRepository(conn *gorm.DB) users.Repsitory {
+func NewMySqlRepository(conn *gorm.DB) users.Repository {
 	return &MySqlUsersRepository{
 		Conn: conn,
 	}

@@ -9,13 +9,13 @@ import (
 )
 
 type ticketService struct {
-	ticketRepository Repsitory
-	userRepository   users.Repsitory
+	ticketRepository Repository
+	userRepository   users.Repository
 	eventRepository  events.Repository
 	orderRepository  orders.Repository
 }
 
-func NewTicketService(ticketRepo Repsitory, userRepo users.Repsitory, eventRepo events.Repository) Service {
+func NewTicketService(ticketRepo Repository, userRepo users.Repository, eventRepo events.Repository) Service {
 	return &ticketService{
 		ticketRepository: ticketRepo,
 		userRepository:   userRepo,

@@ -9,10 +9,10 @@ import (
 type ServiceOrder struct {
 	orderRepository Repository
 	eventRepository events.Repository
-	userRepository  users.Repsitory
+	userRepository  users.Repository
 }
 
-func NewOrderService(orderRepo Repository, eventRepo events.Repository, userRepo users.Repsitory) Service {
+func NewOrderService(orderRepo Repository, eventRepo events.Repository, userRepo users.Repository) Service {
 	return &ServiceOrder{
 		orderRepository: orderRepo,
 		eventRepository: eventRepo,

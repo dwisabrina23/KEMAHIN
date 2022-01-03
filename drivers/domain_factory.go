@@ -22,7 +22,7 @@ import (
 	sendDB "kemahin/drivers/thirdparties/sendgrid"
 )
 
-func NewUserRepository(conn *gorm.DB) userDomain.Repsitory {
+func NewUserRepository(conn *gorm.DB) userDomain.Repository {
 	return userDB.NewMySqlRepository(conn)
 }
 
@@ -38,7 +38,7 @@ func NewOrderRepository(conn *gorm.DB) orderDomain.Repository {
 	return orderDB.NewMySQLRepository(conn)
 }
 
-func NewTicketRepository(conn *gorm.DB) ticketDomain.Repsitory {
+func NewTicketRepository(conn *gorm.DB) ticketDomain.Repository {
 	return ticketDB.NewMySQLRepository(conn)
 }
 
